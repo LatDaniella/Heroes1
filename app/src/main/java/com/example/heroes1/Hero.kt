@@ -1,9 +1,9 @@
 package com.example.heroes1
 
 data class Hero (
-    var name: String,
-    var description: String,
-    var superpower: String,
-    var ranking: Int,
-    var image: String
+    val name: String,
+    val description: String,
+    val superpower: String,
+    val ranking: Int,
+    val image: String
 )

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Heroes1">
         <activity
-            android:name=".HeroesActivity"
+            android:name=".HeroesListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
