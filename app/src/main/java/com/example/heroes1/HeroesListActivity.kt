@@ -1,6 +1,7 @@
 package com.example.heroes1
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -40,6 +41,7 @@ class HeroesListActivity : AppCompatActivity() {
          adapter = HeroAdapter(heroesList)
          binding.recyclerViewHerosList.adapter = adapter
          binding.recyclerViewHerosList.layoutManager = LinearLayoutManager(this)
+         
 
 
 

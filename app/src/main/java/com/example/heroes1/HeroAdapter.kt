@@ -1,5 +1,6 @@
 package com.example.heroes1
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class HeroAdapter(var dataSet: List<Hero>) :
 
         init {
             // Define click listener for the ViewHolder's View.
+            // view.findViewById looks for the id in the ViewHolder Class
             textViewRanking = view.findViewById(R.id.textView_heroItem_ranking)
             textViewName = view.findViewById(R.id.textView_heroItem_name)
             textViewDesc = view.findViewById(R.id.textView_heroItem_description)
@@ -51,12 +53,20 @@ class HeroAdapter(var dataSet: List<Hero>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
+        // assigning all values (put on click listeners too
         val hero = dataSet[position]
         viewHolder.textViewRanking.text = hero.ranking.toString()
         viewHolder.textViewName.text = hero.name
         viewHolder.textViewDesc.text = hero.description
         viewHolder.layout.setOnClickListener{
-            Toast.makeText(it.context, "Hi, you clicked on ${hero.name}", Toast.LENGTH_SHORT).show()
+            // Toast.makeText(it.context, "Hi, you clicked on ${hero.name}", Toast.LENGTH_SHORT).show()
+            //get context from something in viewHolder
+            val context = viewHolder.layout.context
+            //make the intent with context we got
+            val heroDetailIntent = Intent(context, HeroesDetailActivity::class.java).apply{
+                putExtra(HeroesDetailActivity.EXTRA_HERO, hero)
+            }
+            context.startActivity(heroDetailIntent)
         }
     }
 
