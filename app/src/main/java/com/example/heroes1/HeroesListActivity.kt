@@ -1,12 +1,13 @@
 package com.example.heroes1
 
-import android.content.ContentValues.TAG
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.heroes1.databinding.ActivityHeroesDetailBinding
 import com.example.heroes1.databinding.ActivityHeroesListBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -41,7 +42,6 @@ class HeroesListActivity : AppCompatActivity() {
          adapter = HeroAdapter(heroesList)
          binding.recyclerViewHerosList.adapter = adapter
          binding.recyclerViewHerosList.layoutManager = LinearLayoutManager(this)
-         
 
 
 
@@ -57,5 +57,32 @@ class HeroesListActivity : AppCompatActivity() {
          // TODO: Make a HeroAdapter.kt class modeled after the CustomAdapter from documentation
 
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_sorting, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.name_menu -> {
+                Toast.makeText(this, "Hi, you clicked on name menu", Toast.LENGTH_SHORT).show()
+                adapter.dataSet = adapter.dataSet.sortedBy { it.name }
+                adapter.notifyDataSetChanged()
+                // anytime the data set is changing / we change it, must notify the adapter
+                true
+            }
+            R.id.rank_menu -> {
+                Toast.makeText(this, "Hi, you clicked on rank menu", Toast.LENGTH_SHORT).show()
+                adapter.dataSet = adapter.dataSet.sortedBy{it.ranking}
+                adapter.notifyDataSetChanged()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
